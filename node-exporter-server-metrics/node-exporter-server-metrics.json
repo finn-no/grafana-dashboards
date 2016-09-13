@@ -119,7 +119,7 @@
             }
           ],
           "thresholds": "",
-          "title": "cpu cores",
+          "title": "CPU Cores",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -549,7 +549,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "load",
+          "title": "Load",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -722,7 +722,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Disk utilization per device",
+          "title": "Disk Utilization per Device",
           "tooltip": {
             "msResolution": false,
             "shared": false,
@@ -821,7 +821,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Disk IOs per device",
+          "title": "Disk IOs per Device",
           "tooltip": {
             "msResolution": false,
             "shared": false,
@@ -921,7 +921,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Disk throughput per device",
+          "title": "Disk Throughput per Device",
           "tooltip": {
             "msResolution": false,
             "shared": false,
@@ -1008,7 +1008,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "context switches",
+          "title": "Context Switches",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1107,7 +1107,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "network traffic",
+          "title": "Network Traffic",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1193,7 +1193,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "netstat",
+          "title": "Netstat",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1308,7 +1308,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "UDP stats",
+          "title": "UDP Stats",
           "tooltip": {
             "msResolution": false,
             "shared": true,
