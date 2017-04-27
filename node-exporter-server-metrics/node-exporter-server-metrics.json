@@ -1472,6 +1472,7 @@
         "name": "node",
         "query": "label_values(node_boot_time, instance)",
         "refresh": 1,
+        "sort": 1,
         "type": "query",
         "options": []
       }
