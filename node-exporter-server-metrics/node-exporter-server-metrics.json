@@ -624,7 +624,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "100.0 - 100 * (node_filesystem_free{instance=~'$node',device !~'tmpfs',device!~'by-uuid'} / node_filesystem_size{instance=~'$node',device !~'tmpfs',device!~'by-uuid'})",
+              "expr": "100.0 - 100 * (node_filesystem_avail{instance=~'$node',device !~'tmpfs',device!~'by-uuid'} / node_filesystem_size{instance=~'$node',device !~'tmpfs',device!~'by-uuid'})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{mountpoint}}",
