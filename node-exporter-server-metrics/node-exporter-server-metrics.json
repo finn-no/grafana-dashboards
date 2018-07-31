@@ -108,7 +108,8 @@
           },
           "targets": [
             {
-              "expr": "count(node_cpu_seconds_total{instance=~\"$node\", mode=\"system\"})",
+              "expr": "count(node_cpu_seconds_total{instance=~\"$node\", mode=\"system\"}) or count(node_cpu{instance=~\"$node\", mode=\"system\"})",
+              "instant": true,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -183,7 +184,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode=\"system\",instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"system\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"system\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{mode}}",
@@ -193,7 +194,7 @@
               "target": ""
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='user',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"user\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"user\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "user",
@@ -201,7 +202,7 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='nice',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"nice\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"nice\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "nice",
@@ -209,7 +210,7 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='iowait',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"iowait\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"iowait\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "iowait",
@@ -217,14 +218,14 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='steal',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"steal\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"steal\",instance=~'$node'}[5m]))",
               "intervalFactor": 2,
               "legendFormat": "steal",
               "refId": "H",
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"idle\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"idle\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "idle",
@@ -232,7 +233,7 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='irq',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"irq\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"irq\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "irq",
@@ -240,7 +241,7 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='softirq',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"softirq\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"softirq\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "softirq",
@@ -248,7 +249,7 @@
               "step": 1200
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='guest',instance=~'$node'}[5m]))",
+              "expr": "sum(irate(node_cpu_seconds_total{mode=\"guest\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"guest\",instance=~'$node'}[5m]))",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "guest",
@@ -348,7 +349,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "( node_memory_MemTotal_bytes{instance=~'$node'} - node_memory_MemFree_bytes{instance=~'$node'} - node_memory_Buffers_bytes{instance=~'$node'} - node_memory_Cached_bytes{instance=~'$node'} - node_memory_SwapCached_bytes{instance=~'$node'} - node_memory_Slab_bytes{instance=~'$node'} - node_memory_PageTables_bytes{instance=~'$node'} - node_memory_VmallocUsed_bytes{instance=~'$node'} )",
+              "expr": "( node_memory_MemTotal_bytes{instance=~'$node'} - node_memory_MemFree_bytes{instance=~'$node'} - node_memory_Buffers_bytes{instance=~'$node'} - node_memory_Cached_bytes{instance=~'$node'} - node_memory_SwapCached_bytes{instance=~'$node'} - node_memory_Slab_bytes{instance=~'$node'} - node_memory_PageTables_bytes{instance=~'$node'} - node_memory_VmallocUsed_bytes{instance=~'$node'} ) or ( node_memory_MemTotal{instance=~'$node'} - node_memory_MemFree{instance=~'$node'} - node_memory_Buffers{instance=~'$node'} - node_memory_Cached{instance=~'$node'} - node_memory_SwapCached{instance=~'$node'} - node_memory_Slab{instance=~'$node'} - node_memory_PageTables{instance=~'$node'} - node_memory_VmallocUsed{instance=~'$node'} )",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Apps",
@@ -358,7 +359,7 @@
               "target": ""
             },
             {
-              "expr": "node_memory_Buffers_bytes{instance=~'$node'}",
+              "expr": "node_memory_Buffers_bytes{instance=~'$node'} or node_memory_Buffers{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Buffers",
@@ -366,7 +367,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Cached_bytes{instance=~'$node'}",
+              "expr": "node_memory_Cached_bytes{instance=~'$node'} or node_memory_Cached{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Cached",
@@ -374,7 +375,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_MemFree_bytes{instance=~'$node'}",
+              "expr": "node_memory_MemFree_bytes{instance=~'$node'} or node_memory_MemFree{instance=~'$node'}",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -383,7 +384,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Slab_bytes{instance=~'$node'}",
+              "expr": "node_memory_Slab_bytes{instance=~'$node'} or node_memory_Slab{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Slab",
@@ -391,7 +392,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_SwapCached_bytes{instance=~'$node'}",
+              "expr": "node_memory_SwapCached_bytes{instance=~'$node'} or node_memory_SwapCached{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "SwapCached",
@@ -399,7 +400,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_PageTables_bytes{instance=~'$node'}",
+              "expr": "node_memory_PageTables_bytes{instance=~'$node'} or node_memory_PageTables{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "PageTables",
@@ -407,7 +408,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_VmallocUsed_bytes{instance=~'$node'}",
+              "expr": "node_memory_VmallocUsed_bytes{instance=~'$node'} or node_memory_VmallocUsed{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "VmallocUsed",
@@ -416,7 +417,7 @@
               "step": 1200
             },
             {
-              "expr": "(node_memory_SwapTotal_bytes{instance=~'$node'} - node_memory_SwapFree{instance=~'$node'})",
+              "expr": "(node_memory_SwapTotal_bytes{instance=~'$node'} - node_memory_SwapFree{instance=~'$node'}) or (node_memory_SwapTotal{instance=~'$node'} - node_memory_SwapFree{instance=~'$node'})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Swap",
@@ -425,7 +426,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Committed_AS_bytes{instance=~'$node'}",
+              "expr": "node_memory_Committed_AS_bytes{instance=~'$node'} or node_memory_Committed_AS{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Committed",
@@ -434,7 +435,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Mapped_bytes{instance=~'$node'}",
+              "expr": "node_memory_Mapped_bytes{instance=~'$node'} or node_memory_Mapped{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Mapped",
@@ -442,7 +443,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Active_bytes{instance=~'$node'}",
+              "expr": "node_memory_Active_bytes{instance=~'$node'} or node_memory_Active{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Active",
@@ -451,7 +452,7 @@
               "step": 1200
             },
             {
-              "expr": "node_memory_Inactive_bytes{instance=~'$node'}",
+              "expr": "node_memory_Inactive_bytes{instance=~'$node'} or node_memory_Inactive{instance=~'$node'}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Inactive",
@@ -624,7 +625,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "100.0 - 100 * (node_filesystem_avail_bytes{instance=~'$node',device !~'tmpfs',device!~'by-uuid'} / node_filesystem_size_bytes{instance=~'$node',device !~'tmpfs',device!~'by-uuid'})",
+              "expr": "100.0 - 100 * (node_filesystem_avail_bytes{instance=~'$node',device !~'tmpfs',device!~'by-uuid'} / node_filesystem_size_bytes{instance=~'$node',device !~'tmpfs',device!~'by-uuid'}) or 100.0 - 100 * (node_filesystem_avail{instance=~'$node',device !~'tmpfs',device!~'by-uuid'} / node_filesystem_size{instance=~'$node',device !~'tmpfs',device!~'by-uuid'})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{mountpoint}}",
@@ -710,7 +711,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[5m])/10",
+              "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[5m])/10 or irate(node_disk_io_time_ms{instance=~\"$node\"}[5m])/10",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{device}}",
@@ -801,7 +802,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_reads_completed_total{instance=~'$node'}[5m])",
+              "expr": "irate(node_disk_reads_completed_total{instance=~'$node'}[5m]) or irate(node_disk_reads_completed{instance=~'$node'}[5m])",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "{{device}}_read",
@@ -811,7 +812,7 @@
               "target": ""
             },
             {
-              "expr": "irate(node_disk_writes_completed_total{instance=~'$node'}[5m])",
+              "expr": "irate(node_disk_writes_completed_total{instance=~'$node'}[5m]) or irate(node_disk_writes_completed{instance=~'$node'}[5m])",
               "intervalFactor": 2,
               "legendFormat": "{{device}}_write",
               "metric": "",
@@ -901,7 +902,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_read_bytes_total{instance=~'$node'}[5m]) * 512",
+              "expr": "irate(node_disk_read_bytes_total{instance=~'$node'}[5m]) * 512 or irate(node_disk_sectors_read{instance=~'$node'}[5m]) * 512",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "{{device}}_read",
@@ -909,7 +910,7 @@
               "step": 2400
             },
             {
-              "expr": "irate(node_disk_written_bytes_total{instance=~'$node'}[5m]) * 512",
+              "expr": "irate(node_disk_written_bytes_total{instance=~'$node'}[5m]) * 512 or irate(node_disk_sectors_written{instance=~'$node'}[5m]) * 512",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "{{device}}_write",
@@ -996,7 +997,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_context_switches_total{instance=~\"$node\"}[5m])",
+              "expr": "irate(node_context_switches_total{instance=~\"$node\"}[5m]) or irate(node_context_switches{instance=~\"$node\"}[5m])",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "context switches",
@@ -1087,7 +1088,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_network_receive_bytes_total{instance=~'$node'}[5m])*8",
+              "expr": "irate(node_network_receive_bytes_total{instance=~'$node'}[5m])*8 or irate(node_network_receive_bytes{instance=~'$node'}[5m])*8",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{device}}_in",
@@ -1097,7 +1098,7 @@
               "target": ""
             },
             {
-              "expr": "irate(node_network_transmit_bytes_total{instance=~'$node'}[5m])*8",
+              "expr": "irate(node_network_transmit_bytes_total{instance=~'$node'}[5m])*8 or irate(node_network_transmit_bytes{instance=~'$node'}[5m])*8",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{device}}_out",
@@ -1470,7 +1471,7 @@
         "multi": true,
         "multiFormat": "regex values",
         "name": "node",
-        "query": "label_values(node_boot_time_seconds, instance)",
+        "query": "label_values(node_exporter_build_info, instance)",
         "refresh": 1,
         "sort": 1,
         "type": "query",
