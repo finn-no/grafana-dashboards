@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 1s
+  evaluation_interval: 1s
+
+scrape_configs:
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - "node_exporter-v013:9100"
+          - "node_exporter-v016:9100"
+          - "node_exporter-master:9100"
